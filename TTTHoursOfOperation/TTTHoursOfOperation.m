@@ -362,10 +362,10 @@ TTTWeekday TTTWeekdayForNSDate(NSDate *date) {
 		}
 		
 		NSString *value = nil;
-		if ([[groupedHours lastObject] isClosed]) {
+		if ([(TTTDailyHoursOfOperation *)[groupedHours lastObject] isClosed]) {
 			value = NSLocalizedString(@"Closed", nil);
 		} else {
-			value = [TTTHoursOfOperationSegment descriptionForSegments:[[groupedHours lastObject] segments]];
+			value = [TTTHoursOfOperationSegment descriptionForSegments:[(TTTDailyHoursOfOperation *)[groupedHours lastObject] segments]];
 		}
 		
 		[mutableDescriptions addObject:[NSString stringWithFormat:NSLocalizedString(@"%@: %@", @"#{label}: {#{opening} - #{closing}}"), label, value]];				  
