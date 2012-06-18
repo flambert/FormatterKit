@@ -31,7 +31,7 @@ enum {
 } URLRequestFormatterViewControllerSectionIndexes;
 
 @interface URLRequestFormatterViewController ()
-@property (readwrite, nonatomic, retain) NSURLRequest *request;
+@property (readwrite, nonatomic) NSURLRequest *request;
 @end
 
 @implementation URLRequestFormatterViewController
@@ -43,11 +43,11 @@ enum {
         return nil;
     }
     
-    self.title = NSLocalizedString(@"Hours of Operation Formatter", nil);
+    self.title = NSLocalizedString(@"URL Request Formatter", nil);
     
-    NSMutableURLRequest *mutableRequest = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://api.gowalla.com/spots"]] autorelease];
+    NSMutableURLRequest *mutableRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://www.example.com"]];
     [mutableRequest setHTTPMethod:@"POST"];
-    [mutableRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [mutableRequest addValue:@"text/html" forHTTPHeaderField:@"Accept"];
     self.request = mutableRequest;
     
     return self;
@@ -101,9 +101,10 @@ enum {
     cell.textLabel.numberOfLines = 0;
     
     static TTTURLRequestFormatter *_urlRequestFormatter = nil;
-    if (!_urlRequestFormatter) {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         _urlRequestFormatter = [[TTTURLRequestFormatter alloc] init];
-    }
+    });
     
     switch (indexPath.section) {
         case StandardSectionIndex:

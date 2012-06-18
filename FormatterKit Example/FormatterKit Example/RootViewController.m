@@ -22,7 +22,6 @@
 
 #import "RootViewController.h"
 #import "ArrayFormatterViewController.h"
-#import "HoursOfOperationFormatterViewController.h"
 #import "LocationFormatterViewController.h"
 #import "OrdinalNumberFormatterViewController.h"
 #import "TimeIntervalFormatterViewController.h"
@@ -31,7 +30,6 @@
 
 enum {
     ArrayRowIndex,
-    HoursOfOperationRowIndex,
     LocationRowIndex,
     OrdinalNumberRowIndex,
     TimeIntervalRowIndex,
@@ -61,7 +59,7 @@ enum {
     
     self.title = NSLocalizedString(@"FormatterKit", nil);
     
-    self.navigationItem.backBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", nil) style:UIBarButtonItemStyleDone target:nil action:nil] autorelease];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", nil) style:UIBarButtonItemStyleDone target:nil action:nil];
 }
 
 
@@ -86,7 +84,7 @@ enum {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     [self configureCell:cell atIndexPath:indexPath];
@@ -98,9 +96,6 @@ enum {
     switch (indexPath.row) {
         case ArrayRowIndex:
             cell.textLabel.text = NSLocalizedString(@"Array Formatter", nil);
-            break;
-        case HoursOfOperationRowIndex:
-            cell.textLabel.text = NSLocalizedString(@"Hours of Operation Formatter", nil);
             break;
         case LocationRowIndex:
             cell.textLabel.text = NSLocalizedString(@"Location Formatter", nil);
@@ -129,25 +124,22 @@ enum {
     
     switch (indexPath.row) {
         case ArrayRowIndex:
-            viewController = [[[ArrayFormatterViewController alloc] init] autorelease];
-            break;
-        case HoursOfOperationRowIndex:
-            viewController = [[[HoursOfOperationFormatterViewController alloc] init] autorelease];
+            viewController = [[ArrayFormatterViewController alloc] init];
             break;
         case LocationRowIndex:
-            viewController = [[[LocationFormatterViewController alloc] init] autorelease];
+            viewController = [[LocationFormatterViewController alloc] init];
             break;
         case OrdinalNumberRowIndex:
-            viewController = [[[OrdinalNumberFormatterViewController alloc] init] autorelease];
+            viewController = [[OrdinalNumberFormatterViewController alloc] init];
             break;
         case TimeIntervalRowIndex:
-            viewController = [[[TimeIntervalFormatterViewController alloc] init] autorelease];
+            viewController = [[TimeIntervalFormatterViewController alloc] init];
             break;
         case UnitOfInformationRowIndex:
-            viewController = [[[UnitOfInformationFormatterViewController alloc] init] autorelease];
+            viewController = [[UnitOfInformationFormatterViewController alloc] init];
             break;
         case URLRequestRowIndex:
-            viewController = [[[URLRequestFormatterViewController alloc] init] autorelease];
+            viewController = [[URLRequestFormatterViewController alloc] init];
             break;
     }
     

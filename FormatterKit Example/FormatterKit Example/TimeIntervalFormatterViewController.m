@@ -47,7 +47,7 @@ enum {
         return nil;
     }
     
-    self.title = NSLocalizedString(@"Hours of Operation Formatter", nil);
+    self.title = NSLocalizedString(@"Time Interval Formatter", nil);
         
     return self;
 }
@@ -83,10 +83,11 @@ enum {
     cell.textLabel.font = [UIFont systemFontOfSize:14];
     
     static TTTTimeIntervalFormatter *_timeIntervalFormatter = nil;
-    if (!_timeIntervalFormatter) {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         _timeIntervalFormatter = [[TTTTimeIntervalFormatter alloc] init];
         [_timeIntervalFormatter setLocale:[NSLocale currentLocale]];
-    }
+    });
     
     switch (indexPath.section) {
         case StandardPastSectionIndex:
